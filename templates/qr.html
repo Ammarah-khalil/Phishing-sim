@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scan to Win</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+
+
+    <div class="content-wrapper">
+        <div class="qr-container">
+            <h1>Claim Your Prize</h1>
+            <p>Scan the QR code below to log in and claim your reward.</p>
+
+            {% if qr_image %}
+            <img src="{{ qr_image }}" alt="QR Code" class="qr-img" width="250">
+            {% else %}
+            <p>QR Code not generated.</p>
+            {% endif %}
+
+            <div style="margin-top: 20px; color: #555; text-align: left; font-size: 0.9em;">
+                <p><strong>Instructions:</strong></p>
+                <ol>
+                    <li>Open your camera app.</li>
+                    <li>Point it at the QR code.</li>
+                    <li>Click the link that appears.</li>
+                    <li><strong>Notice:</strong> This is a simulation test.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

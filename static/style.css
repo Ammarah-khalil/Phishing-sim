@@ -1,0 +1,185 @@
+body {
+    background-color: #fafafa;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* --- Safety Banner --- */
+.simulation-banner {
+    background-color: #ffcc00;
+    color: #000;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    border-bottom: 1px solid #e0b800;
+}
+
+.content-wrapper {
+    margin-top: 60px;
+    /* Space for banner */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* --- Instagram Style Login --- */
+.ig-container {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    width: 350px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.ig-logo {
+    font-family: 'Grand Hotel', cursive;
+    /* Fallback or load font if possible, using standard sans for now if generic */
+    font-size: 3rem;
+    margin-bottom: 30px;
+    display: block;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/800px-Instagram_logo.svg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 60px;
+    text-indent: -9999px;
+}
+
+.ig-form input {
+    width: 100%;
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    padding: 9px 8px;
+    margin-bottom: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.ig-btn {
+    width: 100%;
+    background-color: #0095f6;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    padding: 5px 9px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.ig-btn:disabled {
+    background-color: #b2dffc;
+}
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    color: #8e8e8e;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.or-divider span {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #dbdbdb;
+}
+
+.or-divider p {
+    margin: 0 15px;
+}
+
+/* --- OAuth Style --- */
+.oauth-container {
+    background: white;
+    width: 400px;
+    padding: 40px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.oauth-logo {
+    width: 75px;
+    margin-bottom: 10px;
+}
+
+.oauth-title {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #202124;
+}
+
+.oauth-subtitle {
+    font-size: 16px;
+    margin-bottom: 40px;
+    color: #202124;
+}
+
+.oauth-input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.oauth-btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+}
+
+/* --- QR Page --- */
+.qr-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.qr-img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+/* --- Consent Checkbox Wrapper --- */
+.consent-wrapper {
+    margin: 15px 0;
+    font-size: 12px;
+    color: #555;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+}
+
+.consent-wrapper input {
+    margin-right: 8px;
+    margin-top: 2px;
+    width: auto !important;
+    /* Override ig-input width */
+}
