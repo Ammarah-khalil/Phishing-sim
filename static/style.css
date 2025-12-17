@@ -10,6 +10,167 @@ body {
     flex-direction: column;
 }
 
+/* --- HACKER THEME (Dark Purple/Blue Smooth) --- */
+body.hacker-theme {
+    /* Deep smooth gradient: Dark Purple -> Deep Blue */
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1f1b2e 100%);
+    background-size: 200% 200%;
+    animation: gradientBG 20s ease infinite;
+    color: #d1d5db;
+    /* Soft light gray */
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.hacker-theme h1,
+.hacker-theme h2,
+.hacker-theme h3 {
+    color: #e0e7ff;
+    /* Cool white */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+    text-shadow: none;
+}
+
+.hacker-theme a {
+    color: #a5b4fc;
+    /* Soft Indigo */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.hacker-theme a:hover {
+    color: #818cf8;
+}
+
+.hacker-theme .container {
+    background: rgba(30, 30, 40, 0.8) !important;
+    /* Semi-transparent dark */
+    backdrop-filter: blur(10px);
+    /* Smooth glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+    color: #e0e0e0 !important;
+    border-radius: 24px !important;
+    /* "Not cornery" - very rounded */
+    padding: 40px !important;
+}
+
+/* Dropdowns & Inputs: Smooth & Rounded */
+.hacker-theme select,
+.hacker-theme input {
+    background: rgba(20, 20, 30, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #e0e0e0 !important;
+    font-family: 'Consolas', 'Monaco', monospace;
+    padding: 15px 20px;
+    border-radius: 12px;
+    /* Smooth rounded inputs */
+    width: 100%;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.hacker-theme input:focus,
+.hacker-theme select:focus {
+    border-color: #6366f1 !important;
+    /* Soft Indigo border */
+    background: rgba(30, 30, 45, 0.9) !important;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.hacker-theme input::placeholder {
+    color: #6b7280;
+}
+
+.hacker-theme option {
+    background-color: #1f1b2e !important;
+    color: #e0e0e0 !important;
+}
+
+/* Buttons: Pill Shaped & Smooth */
+.hacker-theme button,
+.hacker-theme .continue-btn {
+    background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%) !important;
+    /* Deep Indigo Gradient */
+    border: none !important;
+    color: white !important;
+    font-family: 'Consolas', 'Monaco', monospace !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 14px 30px;
+    border-radius: 30px !important;
+    /* Pill shape ("not cornery") */
+    box-shadow: 0 4px 15px rgba(67, 56, 202, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hacker-theme button:hover,
+.hacker-theme .continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(67, 56, 202, 0.4);
+    filter: brightness(1.1);
+}
+
+/* --- Admin Table Override --- */
+.hacker-theme table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    /* Spacing between rows */
+    width: 100%;
+    color: #d1d5db;
+    font-size: 14px;
+}
+
+.hacker-theme th {
+    color: #a5b4fc;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    border: none;
+}
+
+.hacker-theme td {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border: none;
+}
+
+.hacker-theme td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.hacker-theme td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.hacker-theme tr:hover td {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* --- END HACKER THEME --- */
+
 /* --- Safety Banner --- */
 .simulation-banner {
     background-color: #ffcc00;
