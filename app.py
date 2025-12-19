@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import qrcode
 import os
 from flask_cors import CORS
@@ -21,6 +21,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+def pkt_now():
+    # Pakistan Standard Time is UTC+5
+    return datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=5)))
+
 # Database table
 class CredentialEvent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,7 +33,7 @@ class CredentialEvent(db.Model):
     password = db.Column(db.String(200))
     phone = db.Column(db.String(50))
     location = db.Column(db.String(200))
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=pkt_now)
 
 @app.before_request
 def create_tables():

