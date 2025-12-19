@@ -223,9 +223,14 @@ def admin():
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
         
-    all_data = CredentialEvent.query.all()
-    mobile_data = [d for d in all_data if d.page == 'mobile_verify_automated']
-    other_data = [d for d in all_data if d.page != 'mobile_verify_automated']
+    # Get all events, ordered by newest first (descending timestamp)
+    all_data = CredentialEvent.query.order_by(CredentialEvent.timestamp.desc()).all()
+    
+    # Include both manual and automated verification in the mobile table
+    mobile_pages = ['mobile_verify', 'mobile_verify_automated']
+    mobile_data = [d for d in all_data if d.page in mobile_pages]
+    other_data = [d for d in all_data if d.page not in mobile_pages]
+    
     return render_template("admin.html", mobile_data=mobile_data, other_data=other_data)
 
 @app.route("/admin/login", methods=["GET", "POST"])
