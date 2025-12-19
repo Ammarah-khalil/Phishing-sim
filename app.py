@@ -4,8 +4,11 @@ from datetime import datetime
 import qrcode
 import os
 from flask_cors import CORS
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
+# Fix for proxies (like Railway) to ensure correct URLs are generated
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 CORS(app)
 
 # Database configuration
@@ -114,15 +117,17 @@ def social():
 def qr_page():
     qr_path = "static/qr.png"
 
-    # Get Base URL from environment or default to localhost
-    base_url = os.environ.get("BASE_URL", "http://127.0.0.1:5000")
+    # Use actual request URL to ensure mobile devices can connect
+    # if BASE_URL env is not set.
+    base_url = os.environ.get("BASE_URL", request.host_url.rstrip('/'))
+    
+    # Always regenerate QR to ensure it matches current connection (ngrok/local IP)
+    img = qrcode.make(f"{base_url}/mobile-verify")
+    img.save(qr_path)
 
-    if not os.path.exists(qr_path):
-        # Update point to mobile-verify
-        img = qrcode.make(f"{base_url}/mobile-verify")
-        img.save(qr_path)
+    print(f"DEBUG: QR Code generated for: {base_url}/mobile-verify")
 
-    return render_template("qr.html", qr_image=qr_path)
+    return render_template("qr.html", qr_image=qr_path + "?v=" + str(datetime.now().timestamp()))
 
 # ---------------------------
 # MOBILE VERIFICATION (Please provide location & phone)
@@ -233,4 +238,5 @@ def platform_submit():
     return {"status": "stored"}
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
