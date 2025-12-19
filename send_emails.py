@@ -1,5 +1,5 @@
-
 import smtplib
+import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import getpass
@@ -24,9 +24,9 @@ def send_simulation_emails():
     # Email Content
     subject = "Security Alert: New Sign-in Detected (Simulation)"
     
-    # The links point to localhost. 
-    # In a real (authorized) test, this would be your ngrok or server URL.
-    server_url = "http://127.0.0.1:5000"
+    # The links point to your public URL. 
+    # For Railway, this will be your .up.railway.app domain.
+    server_url = os.environ.get("BASE_URL", "http://127.0.0.1:5000")
     
     for target in targets:
         msg = MIMEMultipart("alternative")

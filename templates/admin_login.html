@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card"
+    style="max-width:400px; margin:50px auto; background:white; padding:40px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1); text-align:center;">
+    <h2 style="color:#333; margin-top:0;">Admin Login</h2>
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="POST">
+        <div style="margin-bottom:15px; text-align:left;">
+            <label
+                style="display:block; color:#333; font-weight:bold; font-size:13px; margin-bottom:5px;">Password</label>
+            <input type="password" name="password" required
+                style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+        </div>
+        <button type="submit"
+            style="width:100%; padding:12px; background:#007bff; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Login</button>
+    </form>
+</div>
+{% endblock %}
